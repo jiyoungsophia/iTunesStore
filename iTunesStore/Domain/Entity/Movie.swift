@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie {
+struct Movie: MediaItem {
   let id: Int // trackId
   let mediaType: MediaType = .movie
   let artistName: String
