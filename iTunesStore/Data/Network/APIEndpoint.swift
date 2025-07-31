@@ -16,7 +16,7 @@ protocol APIEndpoint {
 extension APIEndpoint {
   var url: URL? {
     var components = URLComponents(string: baseURL + path)
-    
+
     if !parameters.isEmpty {
       components?.queryItems = parameters.map {
         URLQueryItem(name: $0.key, value: $0.value)
@@ -30,32 +30,32 @@ enum iTunesEndpoint: APIEndpoint {
   case seasonMusic(season: SeasonType)
   case searchMovies(term: String)
   case searchPodcasts(term: String)
-  
+
   var baseURL: String {
     return "https://itunes.apple.com"
   }
-  
+
   var path: String {
     return "/search"
   }
-  
+
   var parameters: [String: String] {
     var params = ["lang": "ko_KR"]
-    
+
     switch self {
     case .seasonMusic(let season):
       params["term"] = season.rawValue
       params["media"] = MediaType.music.rawValue
-      
-    case .searchMovies(term: let term):
+
+    case .searchMovies(let term):
       params["term"] = term
       params["media"] = MediaType.movie.rawValue
-      
-    case .searchPodcasts(term: let term):
+
+    case .searchPodcasts(let term):
       params["term"] = term
       params["media"] = MediaType.podcast.rawValue
     }
-    
+
     return params
   }
 }

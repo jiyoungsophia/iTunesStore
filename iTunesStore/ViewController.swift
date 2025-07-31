@@ -17,10 +17,10 @@ class ViewController: UIViewController {
     }
   
   private func testNetworkService() {
-    let networkService = NetworkServiceImp()
+    let networkService = NetworkService()
     let endpoint = iTunesEndpoint.seasonMusic(season: .spring)
     
-    networkService.fetch(endPoint: endpoint)
+    networkService.fetch(endpoint: endpoint)
       .observe(on: MainScheduler.instance)
       .subscribe(
         onSuccess: { (response: MusicResponseDTO) in

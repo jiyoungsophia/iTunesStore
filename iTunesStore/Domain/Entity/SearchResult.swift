@@ -12,3 +12,14 @@ struct SearchResult {
   let podcasts: [Podcast]
   let searchTerm: String
 }
+
+extension SearchResult {
+  // 편의 프로퍼티들
+  var totalCount: Int {
+      return movies.count + podcasts.count
+  }
+
+  var isEmpty: Bool {
+      return movies.isEmpty && podcasts.isEmpty
+  }
+}
