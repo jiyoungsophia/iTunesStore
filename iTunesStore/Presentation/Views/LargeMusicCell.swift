@@ -156,8 +156,6 @@ final class LargeMusicCell: UICollectionViewCell {
     }
   }
   
-  // MARK: - Actions
-  
   // MARK: - Methods
   
   func configure(music: Music) {
@@ -168,7 +166,4 @@ final class LargeMusicCell: UICollectionViewCell {
     trackNameLabel.text = music.trackName
     artistNameLabel.text = music.artistName
   }
-  
-  // MARK: - Extensions
-  
 }

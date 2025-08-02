@@ -18,13 +18,13 @@ final class MusicViewReactor: Reactor {
   enum Mutation {
     case setSeasonMusic([SeasonType: [Music]])
     case setLoading(Bool)
-    case setError(Error)
+    case showError(Error)
   }
 
   struct State {
     var seasonMusic: [SeasonType: [Music]] = [:]
     var isLoading: Bool = false
-    var error: Error?
+    @Pulse var errorAlert: Error?
 
     var debugInfo: String {
       let totalCount = seasonMusic.values.flatMap { $0 }.count
@@ -46,7 +46,7 @@ final class MusicViewReactor: Reactor {
             return .setSeasonMusic(seasonMusic)
           }
           .catch { error in
-            return Observable.just(.setError(error))
+            return Observable.just(.showError(error))
           },
         .just(.setLoading(false))
       )
@@ -60,8 +60,8 @@ final class MusicViewReactor: Reactor {
       state.seasonMusic = seasonMusic
     case .setLoading(let isLoading):
       state.isLoading = isLoading
-    case .setError(let error):
-      state.error = error
+    case .showError(let error):
+      state.errorAlert = error
     }
 
     return state
