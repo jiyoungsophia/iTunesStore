@@ -17,5 +17,5 @@ struct Movie: MediaItem {
   let genre: String? // primaryGenreName
   
   let contentRating: String? // contentAdvisoryRating
-  let releaseDate: Date?
+  let releaseDate: String?
 }

@@ -15,13 +15,13 @@ struct MovieResponseDTO: Decodable {
 struct MovieDTO: Decodable {
   let trackId: Int
   let artistName: String
-  let collectionName: String
+  let collectionName: String?
   let trackName: String
   let artworkUrl100: String
   let artworkUrl600: String?
   let primaryGenreName: String?
   let contentAdvisoryRating: String?
-  let releaseDate: Date?
+  let releaseDate: String?
   
   var artworkUrl: String {
       return artworkUrl600 ?? artworkUrl100
@@ -31,7 +31,7 @@ struct MovieDTO: Decodable {
     return Movie(
       id: trackId,
       artistName: artistName,
-      collectionName: collectionName,
+      collectionName: collectionName ?? "Unknown Collection",
       trackName: trackName,
       artworkUrl: artworkUrl,
       genre: primaryGenreName,
