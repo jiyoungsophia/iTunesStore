@@ -49,7 +49,7 @@ class MusicViewController: UIViewController, View {
   // MARK: - Setup Methods
   
   private func setupUI() {
-    title = "Apps"
+    title = "Music"
     navigationController?.navigationBar.prefersLargeTitles = true
     navigationItem.largeTitleDisplayMode = .automatic
     
