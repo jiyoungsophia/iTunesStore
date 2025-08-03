@@ -9,60 +9,6 @@ import SnapKit
 import Then
 import UIKit
 
-final class PodcastRowCell: UICollectionViewCell {
-  
-  // MARK: - UI Components
-  
-  private let stackView = UIStackView().then {
-    $0.axis = .horizontal
-    $0.distribution = .fillEqually
-    $0.spacing = 8
-  }
-  
-  private let firstPodcastCell = PodcastCell()
-  private let secondPodcastCell = PodcastCell()
-  
-  // MARK: - Initializers
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setupUI()
-    setupConstraints()
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  // MARK: - Setup Methods
-  
-  private func setupUI() {
-    contentView.addSubview(stackView)
-    
-    stackView.addArrangedSubview(firstPodcastCell)
-    stackView.addArrangedSubview(secondPodcastCell)
-  }
-  
-  private func setupConstraints() {
-    stackView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
-    }
-  }
-  
-  // MARK: - Configuration
-  
-  func configure(first: Podcast, second: Podcast?) {
-    firstPodcastCell.configure(podcast: first)
-    
-    if let second = second {
-      secondPodcastCell.configure(podcast: second)
-      secondPodcastCell.isHidden = false
-    } else {
-      secondPodcastCell.isHidden = true
-    }
-  }
-}
-
 final class PodcastCell: UICollectionViewCell {
   
   // MARK: - UI Components
@@ -129,15 +75,11 @@ final class PodcastCell: UICollectionViewCell {
     super.layoutSubviews()
     gradientLayer.frame = artworkImageView.bounds
     
-    // 그림자 업데이트
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       self.gradientLayer.frame = self.artworkImageView.bounds
       
-      self.contentView.layer.shadowPath = UIBezierPath(
-        roundedRect: self.containerView.bounds,
-        cornerRadius: self.containerView.layer.cornerRadius
-      ).cgPath
+      self.contentView.updateShadowPath()
     }
   }
   
@@ -145,12 +87,10 @@ final class PodcastCell: UICollectionViewCell {
   
   private func setupUI() {
     contentView.addSubview(containerView)
-
-    contentView.layer.shadowColor = UIColor.black.cgColor
-    contentView.layer.shadowOpacity = 0.15
-    contentView.layer.shadowOffset = CGSize(width: 0, height: 4)
-    contentView.layer.shadowRadius = 8
-    contentView.layer.masksToBounds = false
+    
+    contentView.applyShadow(
+        estimatedSize: CGSize(width: 180, height: 248)
+      )
     
     containerView.addSubview(artworkImageView)
     artworkImageView.layer.addSublayer(gradientLayer)
@@ -197,20 +137,18 @@ final class PodcastCell: UICollectionViewCell {
   func configure(podcast: Podcast) {
     artworkImageView.loadLargeImage(from: podcast.artworkUrl)
     
-    if podcast.genres.count > 2 {
-      genresLabel.text = "\(podcast.genres[0]), \(podcast.genres[1])"
-    } else {
-      genresLabel.text = podcast.genres.joined(separator: ", ")
-    }
+    genresLabel.text = podcast.genres
+      .filter { !$0.contains("팟캐스트") }
+      .joined(separator: ", ")
     
     collectionNameLabel.text = podcast.collectionName
     artistNameLabel.text = podcast.artistName
     
     if let releaseDateString = podcast.releaseDate {
-        let displayDate = String(releaseDateString.prefix(10))
-        releaseDateLabel.text = displayDate
-      } else {
-        releaseDateLabel.text = nil
-      }
+      let displayDate = String(releaseDateString.prefix(10))
+      releaseDateLabel.text = displayDate
+    } else {
+      releaseDateLabel.text = nil
+    }
   }
 }

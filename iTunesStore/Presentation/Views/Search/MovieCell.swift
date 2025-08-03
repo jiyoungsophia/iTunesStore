@@ -34,7 +34,7 @@ final class MovieCell: UICollectionViewCell {
   }
   
   private let contentRatingLabel = UILabel().then {
-    $0.font = .systemFont(ofSize: 12, weight: .semibold)
+    $0.font = .systemFont(ofSize: 16, weight: .black)
     $0.textColor = .white
     $0.textAlignment = .right
     $0.numberOfLines = 1
@@ -92,15 +92,11 @@ final class MovieCell: UICollectionViewCell {
     super.layoutSubviews()
     gradientLayer.frame = artworkImageView.bounds
     
-    // 그림자 업데이트
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       self.gradientLayer.frame = self.artworkImageView.bounds
       
-      self.contentView.layer.shadowPath = UIBezierPath(
-        roundedRect: self.containerView.bounds,
-        cornerRadius: self.containerView.layer.cornerRadius
-      ).cgPath
+      self.contentView.updateShadowPath()
     }
   }
   
@@ -109,11 +105,9 @@ final class MovieCell: UICollectionViewCell {
   private func setupUI() {
     contentView.addSubview(containerView)
     
-    contentView.layer.shadowColor = UIColor.black.cgColor
-    contentView.layer.shadowOpacity = 0.15
-    contentView.layer.shadowOffset = CGSize(width: 0, height: 4)
-    contentView.layer.shadowRadius = 8
-    contentView.layer.masksToBounds = false
+    contentView.applyShadow(
+        estimatedSize: CGSize(width: 350, height: 440)
+      )
     
     containerView.addSubview(artworkImageView)
     artworkImageView.layer.addSublayer(gradientLayer)
@@ -186,7 +180,6 @@ final class MovieCell: UICollectionViewCell {
     trackNameLabel.text = movie.trackName
     
     if let releaseDateString = movie.releaseDate {
-        // 간단히 앞의 10글자만 사용 (2021-12-25T10:30:00Z → 2021-12-25)
         let displayDate = String(releaseDateString.prefix(10))
         releaseDateLabel.text = displayDate
       } else {

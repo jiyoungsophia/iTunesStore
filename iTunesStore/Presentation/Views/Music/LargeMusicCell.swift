@@ -89,10 +89,7 @@ final class LargeMusicCell: UICollectionViewCell {
       guard let self = self else { return }
       self.gradientLayer.frame = self.albumImageView.bounds
       
-      self.contentView.layer.shadowPath = UIBezierPath(
-        roundedRect: self.containerView.bounds,
-        cornerRadius: self.containerView.layer.cornerRadius
-      ).cgPath
+      self.contentView.updateShadowPath()
     }
   }
   
@@ -101,11 +98,9 @@ final class LargeMusicCell: UICollectionViewCell {
   private func setupUI() {
     contentView.addSubview(containerView)
     
-    contentView.layer.shadowColor = UIColor.black.cgColor
-    contentView.layer.shadowOpacity = 0.15
-    contentView.layer.shadowOffset = CGSize(width: 0, height: 4)
-    contentView.layer.shadowRadius = 8
-    contentView.layer.masksToBounds = false
+    contentView.applyShadow(
+        estimatedSize: CGSize(width: 300, height: 220)
+      )
     
     containerView.addSubview(albumImageView)
     albumImageView.layer.addSublayer(gradientLayer)
