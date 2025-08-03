@@ -27,7 +27,7 @@ final class LargeMusicCell: UICollectionViewCell {
   private let gradientLayer = CAGradientLayer().then {
     $0.colors = [
       UIColor.clear.cgColor,
-      UIColor.black.withAlphaComponent(0.7).cgColor,
+      UIColor.black.withAlphaComponent(0.2).cgColor,
     ]
     $0.locations = [0.0, 1.0]
   }
@@ -84,16 +84,24 @@ final class LargeMusicCell: UICollectionViewCell {
     super.layoutSubviews()
     gradientLayer.frame = albumImageView.bounds
     
-    contentView.layer.shadowPath = UIBezierPath(
-      roundedRect: containerView.bounds,
-      cornerRadius: containerView.layer.cornerRadius
-    ).cgPath
+    // 그림자만 업데이트
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      self.gradientLayer.frame = self.albumImageView.bounds
+      
+      self.contentView.layer.shadowPath = UIBezierPath(
+        roundedRect: self.containerView.bounds,
+        cornerRadius: self.containerView.layer.cornerRadius
+      ).cgPath
+    }
   }
   
   // MARK: - Setup Methods
   
   private func setupUI() {
     contentView.addSubview(containerView)
+    
+    // 그림자 설정을 여기서 미리 적용
     contentView.layer.shadowColor = UIColor.black.cgColor
     contentView.layer.shadowOpacity = 0.15
     contentView.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -119,7 +127,7 @@ final class LargeMusicCell: UICollectionViewCell {
     
     albumImageView.snp.makeConstraints {
       $0.top.horizontalEdges.equalToSuperview()
-      $0.height.equalTo(containerView.snp.height).multipliedBy(0.7)
+      $0.height.equalTo(220)
     }
     
     albumNameLabel.snp.makeConstraints {
@@ -133,7 +141,7 @@ final class LargeMusicCell: UICollectionViewCell {
     }
     
     bottomContainerView.snp.makeConstraints {
-      $0.top.equalTo(albumImageView)
+      $0.top.equalTo(albumImageView.snp.bottom)
       $0.horizontalEdges.bottom.equalToSuperview()
     }
     

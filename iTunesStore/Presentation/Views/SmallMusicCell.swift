@@ -34,6 +34,10 @@ final class SmallMusicCell: UICollectionViewCell {
     $0.textColor = .gray
     $0.numberOfLines = 1
   }
+  
+  private let dividerView = UIView().then {
+    $0.backgroundColor = .separator
+  }
 
   // MARK: - Initializers
 
@@ -55,6 +59,7 @@ final class SmallMusicCell: UICollectionViewCell {
     containerView.addSubview(albumIconImageView)
     containerView.addSubview(trackNameLabel)
     containerView.addSubview(artistNameLabel)
+    containerView.addSubview(dividerView)
   }
 
   private func setupConstraints() {
@@ -78,6 +83,13 @@ final class SmallMusicCell: UICollectionViewCell {
       $0.leading.equalTo(albumIconImageView.snp.trailing).offset(12)
       $0.trailing.equalToSuperview().inset(16)
       $0.top.equalTo(containerView.snp.centerY).offset(2)
+    }
+    
+    dividerView.snp.makeConstraints {
+      $0.leading.equalTo(albumIconImageView.snp.trailing).offset(12)
+      $0.trailing.equalToSuperview().inset(16)
+      $0.bottom.equalToSuperview()
+      $0.height.equalTo(0.5)
     }
   }
 
