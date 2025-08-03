@@ -101,7 +101,6 @@ final class LargeMusicCell: UICollectionViewCell {
   private func setupUI() {
     contentView.addSubview(containerView)
     
-    // 그림자 설정을 여기서 미리 적용
     contentView.layer.shadowColor = UIColor.black.cgColor
     contentView.layer.shadowOpacity = 0.15
     contentView.layer.shadowOffset = CGSize(width: 0, height: 4)

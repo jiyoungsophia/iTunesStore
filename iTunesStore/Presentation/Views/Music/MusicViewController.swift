@@ -38,6 +38,7 @@ class MusicViewController: UIViewController, View {
   }
   
   var disposeBag = DisposeBag()
+  var coordinator: AppCoordinator?
   
   // MARK: - Lifecycle
   
@@ -122,7 +123,7 @@ class MusicViewController: UIViewController, View {
     return dataSource
   }
   
-  // MARK: - ReactorKit Binding
+  // MARK: - Binding
   
   func bind(reactor: MusicViewReactor) {
     // Action
@@ -134,8 +135,7 @@ class MusicViewController: UIViewController, View {
     searchBar.rx.textDidBeginEditing
       .bind(onNext: { [weak self] in
         self?.searchBar.resignFirstResponder()
-        // TODO: 검색 화면으로 이동
-        print("검색 화면으로 이동")
+        self?.coordinator?.showSearchScreen()
       })
       .disposed(by: disposeBag)
     
@@ -162,7 +162,7 @@ class MusicViewController: UIViewController, View {
       .compactMap { $0 }
       .observe(on: MainScheduler.instance)
       .bind(onNext: { [weak self] error in
-        self?.showErrorAlert(error)
+        self?.coordinator?.showErrorAlert(error)
       })
       .disposed(by: disposeBag)
   }
@@ -192,18 +192,6 @@ class MusicViewController: UIViewController, View {
     }
     
     dataSource.apply(snapshot, animatingDifferences: true)
-  }
-  
-  // MARK: - Error Handling
-  
-  private func showErrorAlert(_ error: Error) {
-    let alert = UIAlertController(
-      title: "오류",
-      message: error.localizedDescription,
-      preferredStyle: .alert
-    )
-    alert.addAction(UIAlertAction(title: "확인", style: .default))
-    present(alert, animated: true)
   }
 }
 
