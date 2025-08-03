@@ -8,11 +8,11 @@
 import Foundation
 
 struct Music {
-  let id: Int // trackId
+  let id: Int  // trackId
   let mediaType: MediaType = .music
   let artistName: String
-  let albumName: String? // collectionName
+  let albumName: String?  // collectionName
   let trackName: String
-  let artworkUrl: String // artworkUrl100
-  let genre: String? // primaryGenreName
+  let artworkUrl: String  // artworkUrl100
+  let genre: String?  // primaryGenreName
 }
