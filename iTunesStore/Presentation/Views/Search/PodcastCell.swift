@@ -143,12 +143,6 @@ final class PodcastCell: UICollectionViewCell {
     
     collectionNameLabel.text = podcast.collectionName
     artistNameLabel.text = podcast.artistName
-    
-    if let releaseDateString = podcast.releaseDate {
-      let displayDate = String(releaseDateString.prefix(10))
-      releaseDateLabel.text = displayDate
-    } else {
-      releaseDateLabel.text = nil
-    }
+    releaseDateLabel.text = DateHelper.displayDate(from: podcast.releaseDate)
   }
 }

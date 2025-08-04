@@ -15,7 +15,8 @@ struct Movie: MediaItem {
   let trackName: String
   let artworkUrl: String // artworkUrl100
   let genre: String? // primaryGenreName
+  let releaseDate: String?
   
   let contentRating: String? // contentAdvisoryRating
-  let releaseDate: String?
+  let longDescription: String?
 }

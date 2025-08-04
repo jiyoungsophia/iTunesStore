@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Music {
+struct Music: MediaItem {
   let id: Int  // trackId
   let mediaType: MediaType = .music
   let artistName: String
@@ -15,4 +15,9 @@ struct Music {
   let trackName: String
   let artworkUrl: String  // artworkUrl100
   let genre: String?  // primaryGenreName
+  let releaseDate: String?
+  
+  var collectionName: String {
+    return albumName ?? "Unknown Album"
+  }
 }

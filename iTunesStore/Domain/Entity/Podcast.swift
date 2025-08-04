@@ -15,7 +15,7 @@ struct Podcast: MediaItem {
   let trackName: String
   let artworkUrl: String // artworkUrl100
   let genre: String? // primaryGenreName
+  let releaseDate: String?
   
   let genres: [String]
-  let releaseDate: String?
 }

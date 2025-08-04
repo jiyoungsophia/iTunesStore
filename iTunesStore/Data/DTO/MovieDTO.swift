@@ -20,8 +20,9 @@ struct MovieDTO: Decodable {
   let artworkUrl100: String
   let artworkUrl600: String?
   let primaryGenreName: String?
-  let contentAdvisoryRating: String?
   let releaseDate: String?
+  let contentAdvisoryRating: String?
+  let longDescription: String?
   
   var artworkUrl: String {
       return artworkUrl600 ?? artworkUrl100
@@ -35,8 +36,9 @@ struct MovieDTO: Decodable {
       trackName: trackName,
       artworkUrl: artworkUrl,
       genre: primaryGenreName,
+      releaseDate: releaseDate,
       contentRating: contentAdvisoryRating,
-      releaseDate: releaseDate
+      longDescription: longDescription
     )
   }
 }
