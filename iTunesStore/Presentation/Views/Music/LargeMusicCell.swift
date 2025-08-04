@@ -84,7 +84,6 @@ final class LargeMusicCell: UICollectionViewCell {
     super.layoutSubviews()
     gradientLayer.frame = albumImageView.bounds
     
-    // 그림자만 업데이트
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       self.gradientLayer.frame = self.albumImageView.bounds

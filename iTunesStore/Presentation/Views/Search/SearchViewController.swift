@@ -109,7 +109,6 @@ class SearchViewController: UIViewController, View {
     setupConstraints()
   }
   
-  // setupConstraints 메서드 수정
   private func setupConstraints() {
     searchTermTitleLabel.snp.makeConstraints {
       $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
