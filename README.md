@@ -136,4 +136,5 @@ var searchUseCase: SearchUseCaseInterface
 |------------|------------|
 |<img width="200" src="https://github.com/user-attachments/assets/66172de7-b51b-4026-880f-52302ffd1203" />|<img width="600" src="https://github.com/user-attachments/assets/d273b934-2fdd-4665-9caf-7e0efcec8d35" />|
 |Debug Swift 활용해 앱 실행 중 메모리 상태 실시간 확인|Leaks Instrument 실행으로 메모리 누수 여부 검증|
+-> 화면 전환, API 호출, 이미지 로딩 등 모든 주요 기능에서 메모리 누수 없이 정상적인 메모리 관리 확인
 
