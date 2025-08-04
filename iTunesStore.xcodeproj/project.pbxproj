@@ -15,6 +15,7 @@
 		B531536D2E37966A00F138B5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B531536C2E37966A00F138B5 /* Kingfisher */; };
 		B53153702E37967300F138B5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B531536F2E37967300F138B5 /* SnapKit */; };
 		B53153732E37967F00F138B5 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B53153722E37967F00F138B5 /* Then */; };
+		B53406AA2E403AAC0029C85E /* DebugSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B53406A92E403AAC0029C85E /* DebugSwift */; };
 		B5A999962E3B46DC00427E0E /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B5A999952E3B46DC00427E0E /* RxCocoa */; };
 		B5A99AC22E3B78C000427E0E /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = B5A99AC12E3B78C000427E0E /* Dependencies */; };
 		B5D0E2262E3B33A100EE8749 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B5D0E2252E3B33A100EE8749 /* RxSwift */; };
@@ -86,6 +87,7 @@
 				B531536A2E37966000F138B5 /* ReactorKit in Frameworks */,
 				B5A99AC22E3B78C000427E0E /* Dependencies in Frameworks */,
 				B53153732E37967F00F138B5 /* Then in Frameworks */,
+				B53406AA2E403AAC0029C85E /* DebugSwift in Frameworks */,
 				B53153702E37967300F138B5 /* SnapKit in Frameworks */,
 				B53153632E37965600F138B5 /* RxCocoa in Frameworks */,
 				B531536D2E37966A00F138B5 /* Kingfisher in Frameworks */,
@@ -161,6 +163,7 @@
 				B531536F2E37967300F138B5 /* SnapKit */,
 				B53153722E37967F00F138B5 /* Then */,
 				B5A99AC12E3B78C000427E0E /* Dependencies */,
+				B53406A92E403AAC0029C85E /* DebugSwift */,
 			);
 			productName = iTunesStore;
 			productReference = B53153462E3794A700F138B5 /* iTunesStore.app */;
@@ -228,6 +231,7 @@
 				B531536E2E37967300F138B5 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				B53153712E37967F00F138B5 /* XCRemoteSwiftPackageReference "Then" */,
 				B5A99AC02E3B78C000427E0E /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				B53406A82E403AAC0029C85E /* XCRemoteSwiftPackageReference "DebugSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B53153472E3794A700F138B5 /* Products */;
@@ -612,6 +616,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		B53406A82E403AAC0029C85E /* XCRemoteSwiftPackageReference "DebugSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DebugSwift/DebugSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.13;
+			};
+		};
 		B5A99AC02E3B78C000427E0E /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
@@ -657,6 +669,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B53153712E37967F00F138B5 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		B53406A92E403AAC0029C85E /* DebugSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B53406A82E403AAC0029C85E /* XCRemoteSwiftPackageReference "DebugSwift" */;
+			productName = DebugSwift;
 		};
 		B5A999952E3B46DC00427E0E /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
