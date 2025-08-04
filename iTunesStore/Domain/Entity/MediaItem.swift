@@ -15,5 +15,5 @@ protocol MediaItem {
   var trackName: String { get }
   var artworkUrl: String { get }
   var genre: String? { get }
-  var releaseDate: Date? { get }
+  var releaseDate: String? { get }
 }

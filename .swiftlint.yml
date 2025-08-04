@@ -67,6 +67,7 @@ file_length:
 excluded:
   - iTunesStore/AppDelegate.swift
   - iTunesStore/SceneDelegate.swift
+  - iTunesStoreTests/UseCaseTests.swift
 
 analyzer_rules:
   - explicit_self

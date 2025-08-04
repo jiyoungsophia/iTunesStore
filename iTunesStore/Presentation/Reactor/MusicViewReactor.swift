@@ -25,11 +25,6 @@ final class MusicViewReactor: Reactor {
     var seasonMusic: [SeasonType: [Music]] = [:]
     var isLoading: Bool = false
     @Pulse var errorAlert: Error?
-
-    var debugInfo: String {
-      let totalCount = seasonMusic.values.flatMap { $0 }.count
-      return "총 \(totalCount)개 음악 로드됨"
-    }
   }
 
   @Dependency(\.seasonMusicUseCase) private var seasonMusicUseCase

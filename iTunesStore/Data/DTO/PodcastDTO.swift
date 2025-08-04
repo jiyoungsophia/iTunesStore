@@ -15,13 +15,13 @@ struct PodcastResponseDTO: Decodable {
 struct PodcastDTO: Decodable {
   let trackId: Int
   let artistName: String
-  let collectionName: String
+  let collectionName: String?
   let trackName: String
   let artworkUrl100: String
   let artworkUrl600: String?
   let primaryGenreName: String?
   let genres: [String]
-  let releaseDate: Date?
+  let releaseDate: String?
   
   var artworkUrl: String {
       return artworkUrl600 ?? artworkUrl100
@@ -31,7 +31,7 @@ struct PodcastDTO: Decodable {
     return Podcast(
       id: trackId,
       artistName: artistName,
-      collectionName: collectionName,
+      collectionName: collectionName ?? "Unknown Collection",
       trackName: trackName,
       artworkUrl: artworkUrl,
       genre: primaryGenreName,

@@ -17,5 +17,5 @@ struct Podcast: MediaItem {
   let genre: String? // primaryGenreName
   
   let genres: [String]
-  let releaseDate: Date?
+  let releaseDate: String?
 }

@@ -14,7 +14,6 @@ struct SearchResult {
 }
 
 extension SearchResult {
-  // 편의 프로퍼티들
   var totalCount: Int {
       return movies.count + podcasts.count
   }

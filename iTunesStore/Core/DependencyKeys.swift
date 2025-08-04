@@ -11,7 +11,6 @@ import Dependencies
 
 private struct NetworkServiceKey: DependencyKey {
   static let liveValue: NetworkServiceInterface = NetworkService()
-//  static let testValue: NetworkServiceInterface = NetworkServiceStub()
 }
 
 extension DependencyValues {

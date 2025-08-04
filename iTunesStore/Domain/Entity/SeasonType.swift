@@ -13,5 +13,3 @@ enum SeasonType: String, CaseIterable {
   case fall = "가을"
   case winter = "겨울"
 }
-
-
