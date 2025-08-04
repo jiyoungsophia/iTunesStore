@@ -178,12 +178,6 @@ final class MovieCell: UICollectionViewCell {
     collectionNameLabel.text = movie.collectionName
     artistNameLabel.text = movie.artistName
     trackNameLabel.text = movie.trackName
-    
-    if let releaseDateString = movie.releaseDate {
-        let displayDate = String(releaseDateString.prefix(10))
-        releaseDateLabel.text = displayDate
-      } else {
-        releaseDateLabel.text = nil
-      }
+    releaseDateLabel.text = DateHelper.displayDate(from: movie.releaseDate)
   }
 }

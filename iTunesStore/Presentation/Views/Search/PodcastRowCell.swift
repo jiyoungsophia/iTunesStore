@@ -8,8 +8,19 @@
 import SnapKit
 import Then
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class PodcastRowCell: UICollectionViewCell {
+  
+  // MARK: - Properties
+  
+  var onFirstPodcastTap: ((Podcast) -> Void)?
+  var onSecondPodcastTap: ((Podcast) -> Void)?
+  
+  private var firstPodcast: Podcast?
+  private var secondPodcast: Podcast?
+  private var disposeBag = DisposeBag()
   
   // MARK: - UI Components
   
@@ -28,10 +39,20 @@ final class PodcastRowCell: UICollectionViewCell {
     super.init(frame: frame)
     setupUI()
     setupConstraints()
+    setupTapGestures()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposeBag = DisposeBag() // disposeBag 초기화
+    firstPodcast = nil
+    secondPodcast = nil
+    onFirstPodcastTap = nil
+    onSecondPodcastTap = nil
   }
   
   override func layoutSubviews() {
@@ -62,9 +83,38 @@ final class PodcastRowCell: UICollectionViewCell {
     }
   }
   
+  private func setupTapGestures() {
+    let firstTapGesture = UITapGestureRecognizer()
+    firstPodcastCell.addGestureRecognizer(firstTapGesture)
+    firstPodcastCell.isUserInteractionEnabled = true
+    
+    let secondTapGesture = UITapGestureRecognizer()
+    secondPodcastCell.addGestureRecognizer(secondTapGesture)
+    secondPodcastCell.isUserInteractionEnabled = true
+    
+    firstTapGesture.rx.event
+      .bind(onNext: { [weak self] _ in
+        guard let self = self,
+              let podcast = self.firstPodcast else { return }
+        self.onFirstPodcastTap?(podcast)
+      })
+      .disposed(by: disposeBag)
+    
+    secondTapGesture.rx.event
+      .bind(onNext: { [weak self] _ in
+        guard let self = self,
+              let podcast = self.secondPodcast else { return }
+        self.onSecondPodcastTap?(podcast)
+      })
+      .disposed(by: disposeBag)
+  }
+  
   // MARK: - Configuration
   
   func configure(first: Podcast, second: Podcast?) {
+    self.firstPodcast = first
+    self.secondPodcast = second
+    
     firstPodcastCell.configure(podcast: first)
     
     if let second = second {

@@ -45,6 +45,7 @@ class MusicViewController: UIViewController, View {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    collectionView.delegate = self 
   }
   
   // MARK: - Setup Methods
@@ -282,5 +283,12 @@ extension MusicViewController {
       elementKind: UICollectionView.elementKindSectionHeader,
       alignment: .top
     )
+  }
+}
+
+extension MusicViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let musicItem = dataSource.itemIdentifier(for: indexPath) else { return }
+    coordinator?.showDetailScreen(mediaItem: musicItem.music)
   }
 }

@@ -20,8 +20,8 @@ struct PodcastDTO: Decodable {
   let artworkUrl100: String
   let artworkUrl600: String?
   let primaryGenreName: String?
-  let genres: [String]
   let releaseDate: String?
+  let genres: [String]
   
   var artworkUrl: String {
       return artworkUrl600 ?? artworkUrl100
@@ -35,8 +35,8 @@ struct PodcastDTO: Decodable {
       trackName: trackName,
       artworkUrl: artworkUrl,
       genre: primaryGenreName,
-      genres: genres,
-      releaseDate: releaseDate
+      releaseDate: releaseDate,
+      genres: genres
     )
   }
 }

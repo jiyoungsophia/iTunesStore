@@ -20,6 +20,7 @@ struct MusicDTO: Decodable {
   let artworkUrl100: String
   let artworkUrl600: String?
   let primaryGenreName: String?
+  let releaseDate: String?
   
   var artworkUrl: String {
       return artworkUrl600 ?? artworkUrl100
@@ -32,7 +33,8 @@ struct MusicDTO: Decodable {
       albumName: collectionName ?? "Unknown Album",
       trackName: trackName,
       artworkUrl: artworkUrl,
-      genre: primaryGenreName
+      genre: primaryGenreName,
+      releaseDate: releaseDate
     )
   }
 }
