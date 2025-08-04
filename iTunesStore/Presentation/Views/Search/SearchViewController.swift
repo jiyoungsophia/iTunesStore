@@ -291,7 +291,7 @@ class SearchViewController: UIViewController, View {
 extension SearchViewController {
   
   private func createLayout() -> UICollectionViewCompositionalLayout {
-    return UICollectionViewCompositionalLayout { sectionIndex, environment in
+    return UICollectionViewCompositionalLayout { _, _ in
       let itemSize = NSCollectionLayoutSize(
         widthDimension: .fractionalWidth(1.0),
         heightDimension: .estimated(200)
