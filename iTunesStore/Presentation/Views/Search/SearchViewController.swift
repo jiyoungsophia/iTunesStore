@@ -77,6 +77,7 @@ class SearchViewController: UIViewController, View {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    collectionView.delegate = self
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -161,9 +162,17 @@ class SearchViewController: UIViewController, View {
     }
     
     let podcastRowCellRegistration = UICollectionView.CellRegistration<PodcastRowCell, SearchResultRow> {
-      cell, indexPath, item in
+      [weak self] cell, indexPath, item in
       if case .podcastPair(let first, let second) = item {
         cell.configure(first: first, second: second)
+        
+        cell.onFirstPodcastTap = { [weak self] podcast in
+          self?.coordinator?.showDetailScreen(mediaItem: podcast)
+        }
+        
+        cell.onSecondPodcastTap = { [weak self] podcast in
+          self?.coordinator?.showDetailScreen(mediaItem: podcast)
+        }
       }
     }
     
@@ -313,6 +322,21 @@ extension SearchViewController {
       section.interGroupSpacing = 20
       
       return section
+    }
+  }
+}
+
+extension SearchViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let searchRow = dataSource.itemIdentifier(for: indexPath) else { return }
+    
+    switch searchRow {
+    case .movie(let movie):
+      coordinator?.showDetailScreen(mediaItem: movie)
+      
+    case .podcastPair:
+      // 셀 내부에서 처리
+      break
     }
   }
 }

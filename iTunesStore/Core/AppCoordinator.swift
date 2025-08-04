@@ -46,6 +46,19 @@ final class AppCoordinator {
      navigationController?.popViewController(animated: true)
    }
   
+  func showDetailScreen(mediaItem: MediaItem) {
+    let detailViewController = DetailViewController(
+      mediaItem: mediaItem,
+      coordinator: self
+    )
+    detailViewController.modalPresentationStyle = .fullScreen
+    navigationController?.present(detailViewController, animated: true)
+  }
+  
+  func dismissDetailScreen() {
+    navigationController?.dismiss(animated: true)
+  }
+  
   // MARK: - Error Handling
   
   func showErrorAlert(_ error: Error, from viewController: UIViewController? = nil) {
